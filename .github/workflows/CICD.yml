@@ -12,13 +12,14 @@ jobs:
     env: 
       DOCKER_USER: ${{secrets.DOCKER_USER}}
       DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      date: "`r format(Sys.time(), '%d %m, %Y')`"
     steps:
       - uses: actions/checkout@v2
       - name: Docker Login
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         
       - name: Build IMG
-        run: docker build -t shining118/quizlite .
+        run: docker build -t shining118/quizlite:$date .
         
       - name: push to docker
         run: docker push shining118/quizlite
