@@ -1,0 +1,25 @@
+name : Build/Deliver
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    env: 
+      DOCKER_USER: ${{secrets.DOCKER_USER}}
+      DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker Login
+        run: docker login -u $Docker_USER -p $DOCKER_PASSWORD
+        
+      - name: Build IMG
+        run: docker buld -t shining118/quizlite .
+        
+      - name: push to docker
+        run: docker push shining118/quizlite
+      
