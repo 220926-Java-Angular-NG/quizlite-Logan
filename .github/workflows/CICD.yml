@@ -18,7 +18,7 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         
       - name: Build IMG
-        run: docker buld -t shining118/quizlite:$(date +%Y%m%d%H) .
+        run: docker buld -t shining118/quizlite:latest .
         
       - name: push to docker
         run: docker push shining118/quizlite
